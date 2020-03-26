@@ -34,6 +34,38 @@ const main = () => {
                         msg.reply(`Od: **${data[i]['user']}**, Temat: **${data[i]['title']}**`)
                 });
             }
+            else if (msg.content === '!jutro'){
+                msg.reply('**Zajęcia na jutro**')
+                let date = new Date().getDate();
+                lclient.calendar.getCalendar().then(data => {
+                    if (data[date].length>1){
+                        data[date].shift();
+                        data[date].forEach(el => {
+                            msg.reply(`**${el['title']}**`)
+                            
+                        });
+                    }
+                    else {
+                        msg.reply(`**brak zajęć na dzis**`)
+                    }
+                });
+            }
+            else if (msg.content === '!dzis'){
+                msg.reply('**Zajęcia na dzis**')
+                let date = new Date().getDate()-1;
+                lclient.calendar.getCalendar().then(data => {
+                    if (data[date].length>1){
+                        data[date].shift();
+                        data[date].forEach(el => {
+                            msg.reply(`**${el['title']}**`)
+                            
+                        });
+                    }
+                    else {
+                        msg.reply(`**brak zajęć na dzis**`)
+                    }
+                });
+            }
             else if (msg.content === '!koronahelp'){
                 msg.reply("**Dostepne komendy**");
                 msg.reply("**!wiad** - wyświetl 5 ostatnich wiadomości");
