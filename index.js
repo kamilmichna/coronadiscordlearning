@@ -2,11 +2,11 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const Librus = require("librus-api");
 let lclient = new Librus();
-require('dotenv').config()
+require('dotenv').config();
 client.login(process.env.BOT_TOKEN);
 
-setInterval(() => {
-    
+
+const main = () => {    
     lclient.authorize(process.env.LIBRUS_LOGIN,process.env.LIBRUS_PASSWORD).then(()=>{
         console.log('logged')
     
@@ -42,4 +42,6 @@ setInterval(() => {
             }
           });
     })
-}, 600000);
+}
+main();
+setInterval(main,600000);
